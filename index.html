@@ -3,8 +3,29 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link href="css/main.css" rel="stylesheet">
+				<script src="js/jquery-1.11.1.js"> </script>
+				<script src="js/underscore.js"> </script>
+				<script src="js/backbone.js"> </script>
+				<script src="js/main.js"></script>
     </head>
     <body>
+				<div class="templates">
+						<div class="entry">
+								<a class="entry-heading">
+										<%= entry_title %>
+								</a>
+								<div class="date">
+										<%= entry_date %>
+								</div>
+								<div class="entry-description">
+										<i class="fa fa-caret-right"></i> 
+										
+										<%= entry_summary %>
+								</div>
+						</div>
+
+				</div>
+				
         <div class="container">
             <div class="row whole-journal">
                 <div class="col-sm-12">

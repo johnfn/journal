@@ -48,3 +48,7 @@ a.entry-heading {
 	color: white;
 	display: block;
 }
+
+.templates {
+	display: none;
+}
