@@ -8,7 +8,7 @@ $(function() {
 	};
 
 	var PostView = Backbone.View.extend({
-		template: templ(".templates .entry"),
+		template: templ(".templates .entry-template"),
 	
 		initialize: function (attrs) {
 			this.render();
