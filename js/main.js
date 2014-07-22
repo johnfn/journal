@@ -22,7 +22,17 @@ $(function() {
 	});
 
 	var AddEntryButton = Backbone.View.extend({
-		template: templ(".templates .add-entry"),
+		template: templ(".templates .add-entry-template"),
+
+		initialize: function() {
+			this.render();
+		},
+
+		render: function() {
+			this.el.innerHTML = this.template();
+
+			return this;
+		}
 	});
 
 	var SideView = Backbone.View.extend({
@@ -34,11 +44,13 @@ $(function() {
 			this.render();
 		},
 
+		//TODO: is there a cleaner way to do this than creating these els on the fly?
 		render: function() {
-			var addButton = new AddEntryButton();
 			var self = this;
+			var addButton = new AddEntryButton({
+				el: $("<div>").appendTo(self.$el)
+			});
 
-			//TODO: is there a cleaner way to do this than creating these els on the fly?
 			_.each(this.entries, function(e) {
 				new PostView({
 					model: e,
