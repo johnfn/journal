@@ -1,7 +1,6 @@
 
 .entry-list {
 	background-color: 243166;
-	color: white;
 	min-height: 100%;
 	padding-top: 10px
 }
@@ -16,14 +15,12 @@
 a.entry-heading {
     text-shadow: black 1px 1px 1px;
 	float: left;
-    color: white;
     font-size: 20px;
     cursor: pointer;
 }
 
 .entry-description {
 	font-size: 12px;
-	color: #eee;
 	clear: both;
 	text-shadow: black 1px 1px 1px;
 	padding-left: 10px;
@@ -33,11 +30,11 @@ a.entry-heading {
 	border-bottom: 1px solid #115;
 	padding-bottom: 5px;
 	margin-bottom: 10px;
+	color: #A9CAEC;
 }
 
 .date {
 	text-shadow: black 1px 1px 1px;
-	color: lightgray;
 	font-size: 10px;
 	float: right;
 }
@@ -46,7 +43,6 @@ a.entry-heading {
 }
 
 .add-entry {
-	color: white;
 	display: block;
 }
 

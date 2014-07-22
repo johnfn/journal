@@ -1,97 +1,99 @@
 $(function() {
-	var Post = Backbone.Model.extend({
-	
-	});
+  var Post = Backbone.Model.extend({
+  });
 
-	var templ = function(template) {
-		return _.template(_.unescape($(template)[0].innerHTML));
-	};
+  var templ = function(template) {
+    return _.template(_.unescape($(template)[0].innerHTML));
+  };
 
-	var PostView = Backbone.View.extend({
-		template: templ(".templates .entry-template"),
-	
-		initialize: function (attrs) {
-			this.render();
-		},
-	
-		render: function() {
-			this.el.innerHTML = this.template(this.model);
-			
-			return this;
-		}
-	});
+  var PostView = Backbone.View.extend({
+    template: templ(".templates .entry-template"),
+  
+    initialize: function (attrs) {
+      this.render();
+    },
+  
+    render: function() {
+      this.el.innerHTML = this.template(this.model);
+      
+      return this;
+    }
+  });
 
-	var AddEntryButton = Backbone.View.extend({
-		template: templ(".templates .add-entry-template"),
+  var AddEntryButton = Backbone.View.extend({
+    template: templ(".templates .add-entry-template"),
 
-		initialize: function() {
-			this.render();
-		},
+    initialize: function() {
+      this.render();
+    },
 
-		render: function() {
-			this.el.innerHTML = this.template();
+    render: function() {
+      this.el.innerHTML = this.template();
 
-			return this;
-		}
-	});
+      return this;
+    }
+  });
 
-	var SideView = Backbone.View.extend({
-		entries: [],
-		events: {
-			"click .add-entry": "addNewEntry"
-		},
+  var SideView = Backbone.View.extend({
+    entries: [],
+    events: {
+      "click .add-entry": "addNewEntry"
+    },
 
-		initialize: function(attrs) {
-			this.entries = attrs.entries;
+    initialize: function(attrs) {
+      this.entries = attrs.entries;
 
-			this.render();
-		},
+      this.render();
+    },
 
-		addNewEntry: function(e) {
-			$(".entry-list")
-				.children()
-				.fadeOut(100, _.once(function() {
-					$(".entry-list")
-						.animate({width: "50%"}, 100.0, function() {
-							console.log("done");
-						});
-				}));
-		},
+    addNewEntry: function(e) {
+      $(".entry-list")
+        .children()
+        .fadeOut(100, _.once(function() {
+          $(".content")
+            .animate({ width: "50%" }, 100);
 
-		//TODO: is there a cleaner way to do this than creating these els on the fly?
-		render: function() {
-			var self = this;
-			var addButton = new AddEntryButton({
-				el: $("<div>").appendTo(self.$el)
-			});
+          $(".entry-list")
+            .animate({ width: "50%" }, 100.0, function() {
+              console.log("done");
+            });
+        }));
+    },
 
-			_.each(this.entries, function(e) {
-				new PostView({
-					model: e,
-					el: $("<div>").appendTo(self.$el)
-				});
-			});
-		}
-	});
+    //TODO: is there a cleaner way to do this than creating these els on the fly?
+    render: function() {
+      var self = this;
+      var addButton = new AddEntryButton({
+        el: $("<div>").appendTo(self.$el)
+      });
 
-	var post1 = {
-		entry_title: "Some title",
-		entry_date: ("" + new Date).substr(0, 10),
-		entry_summary: "this is a compelling summary",
-		entry_content: "lots and lots of compelling content goes here."
-	};
+      _.each(this.entries, function(e) {
+        new PostView({
+          model: e,
+          el: $("<div>").appendTo(self.$el)
+        });
+      });
+    }
+  });
 
-	var post2 = {
-		entry_title: "Some title",
-		entry_date: ("" + new Date).substr(0, 10),
-		entry_summary: "this is a compelling summary",
-		entry_content: "lots of compelling content goes here."
-	};
+  var post1 = {
+    entry_title: "Some title",
+    entry_date: ("" + new Date()).substr(0, 10),
+    entry_summary: "this is a compelling summary",
+    entry_content: "lots and lots of compelling content goes here."
+  };
 
-	new SideView({ 
-		el: $(".entry-list"),
-		entries: [post1, post2]
-	});
+  var post2 = {
+    entry_title: "Some title",
+    entry_date: ("" + new Date()).substr(0, 10),
+    entry_summary: "this is a compelling summary",
+    entry_content: "lots of compelling content goes here."
+  };
 
-	console.log("bmm");
+  new SideView({ 
+    el: $(".entry-list"),
+    entries: [post1, post2]
+  });
+
+  console.log("bmm");
 });
