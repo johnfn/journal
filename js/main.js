@@ -37,11 +37,25 @@ $(function() {
 
 	var SideView = Backbone.View.extend({
 		entries: [],
+		events: {
+			"click .add-entry": "addNewEntry"
+		},
 
 		initialize: function(attrs) {
 			this.entries = attrs.entries;
 
 			this.render();
+		},
+
+		addNewEntry: function(e) {
+			$(".entry-list")
+				.children()
+				.fadeOut(100, _.once(function() {
+					$(".entry-list")
+						.animate({width: "50%"}, 100.0, function() {
+							console.log("done");
+						});
+				}));
 		},
 
 		//TODO: is there a cleaner way to do this than creating these els on the fly?
@@ -63,15 +77,16 @@ $(function() {
 	var post1 = {
 		entry_title: "Some title",
 		entry_date: ("" + new Date).substr(0, 10),
-		entry_summary: "this is a compelling summary"
+		entry_summary: "this is a compelling summary",
+		entry_content: "lots and lots of compelling content goes here."
 	};
 
 	var post2 = {
 		entry_title: "Some title",
 		entry_date: ("" + new Date).substr(0, 10),
-		entry_summary: "this is a compelling summary"
+		entry_summary: "this is a compelling summary",
+		entry_content: "lots of compelling content goes here."
 	};
-
 
 	new SideView({ 
 		el: $(".entry-list"),
