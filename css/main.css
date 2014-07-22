@@ -36,6 +36,7 @@ a.entry-heading {
 }
 
 .date {
+	text-shadow: black 1px 1px 1px;
 	color: lightgray;
 	font-size: 10px;
 	float: right;

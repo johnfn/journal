@@ -1,84 +1,46 @@
 <html>
-    <head>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link href="css/main.css" rel="stylesheet">
-				<script src="js/jquery-1.11.1.js"> </script>
-				<script src="js/underscore.js"> </script>
-				<script src="js/backbone.js"> </script>
-				<script src="js/main.js"></script>
-    </head>
-    <body>
-				<div class="templates">
-						<div class="entry">
-								<a class="entry-heading">
-										<%= entry_title %>
-								</a>
-								<div class="date">
-										<%= entry_date %>
-								</div>
-								<div class="entry-description">
-										<i class="fa fa-caret-right"></i> 
-										
-										<%= entry_summary %>
-								</div>
-						</div>
+  <head>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="js/jquery-1.11.1.js"> </script>
+    <script src="js/underscore.js"> </script>
+    <script src="js/backbone.js"> </script>
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+    <div class="templates">
+      <div class="entry">
+        <a class="entry-heading">
+          <%= entry_title %>
+        </a>
+        <div class="date">
+          <%= entry_date %>
+        </div>
+        <div class="entry-description">
+          <i class="fa fa-caret-right"></i> 
+          
+          <%= entry_summary %>
+        </div>
+      </div>
+      <a href="#" class="entry add-entry">
+        <i class="fa fa-plus"></i> Add New Post
+      </a>
+    </div>
 
-				</div>
-				
-        <div class="container">
-            <div class="row whole-journal">
-                <div class="col-sm-12">
-                    <h1> some stuff that i wrote goes here </h1>
-                </div>
-                <div class="col-sm-3 entry-list">
-										<a href="#" class="entry add-entry">
-												<i class="fa fa-plus"></i> Add New Post
-										</a>
-                    <div class="entry">
-                        <a class="entry-heading">
-                            entry 1
-                        </a>
-												<div class="date">
-														July 20, 2014
-												</div>
-                        <div class="entry-description">
-                            <i class="fa fa-caret-right"></i> Wow, such awesome entry. 
-                            Blah blah blee.
-                        </div>
-                    </div>
+    <div class="container">
+      <div class="row whole-journal">
+        <div class="col-sm-12">
+          <h1> some stuff that i wrote goes here </h1>
+        </div>
+        <div class="col-sm-3 entry-list">
 
-                    <div class="entry">
-                        <a class="entry-heading">
-                            entry 2
-                        </a>
-												<div class="date">
-														July 20, 2014
-												</div>
-                        <div class="entry-description">
-                            <i class="fa fa-caret-right"></i>
-                            Wow, such awesome entry. 
-                        </div>
-                    </div>
+        </div>
 
-                    <div class="entry">
-                        <a class="entry-heading">
-                            entry 2
-                        </a>
-												<div class="date">
-														July 20, 2014
-												</div>
-                        <div class="entry-description">
-                            <i class="fa fa-caret-right"></i> Wow, such awesome entry. 
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-sm-9 content">
-                    blalahlahl.
-                </div>
-            </div>
-    	</div>
-    </body>
+        <div class="col-sm-9 content">
+          blalahlahl.
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
