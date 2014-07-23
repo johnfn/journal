@@ -22,31 +22,49 @@ $(function() {
 
   var AddEntryButton = Backbone.View.extend({
     template: templ(".templates .add-entry-template"),
+    text: "",
 
-    initialize: function() {
+    initialize: function(text) {
+      _.bindAll(this, "render");
+
+      this.text = text || "Add New Entry";
       this.render();
     },
 
     render: function() {
-      this.el.innerHTML = this.template();
+      this.el.innerHTML = this.template({ content: this.text });
 
       return this;
     }
   });
 
   var SideView = Backbone.View.extend({
+    editTemplate: templ(".templates .write-entry-template"),
     entries: [],
+    state: "list", // or "edit"
     events: {
       "click .add-entry": "addNewEntry"
     },
 
     initialize: function(attrs) {
+      _.bindAll(this, "toggleState", "addNewEntry", "render");
+
       this.entries = attrs.entries;
 
       this.render();
     },
 
+    toggleState: function() {
+      if (this.state == "list") {
+        this.state = "edit";
+      } else {
+        this.state = "list";
+      }
+    },
+
     addNewEntry: function(e) {
+      var self = this;
+
       $(".entry-list")
         .children()
         .fadeOut(100, _.once(function() {
@@ -55,13 +73,27 @@ $(function() {
 
           $(".entry-list")
             .animate({ width: "50%" }, 100.0, function() {
-              console.log("done");
+              self.state = "edit";
             });
         }));
     },
 
     //TODO: is there a cleaner way to do this than creating these els on the fly?
     render: function() {
+      if (this.state == "edit") {
+        this.renderEdit();
+      } else {
+        this.renderList();
+      }
+    },
+
+    renderEdit: function() {
+      var self = this;
+
+      this.el.innerHTML = this.editTemplate();
+    },
+
+    renderList: function() {
       var self = this;
       var addButton = new AddEntryButton({
         el: $("<div>").appendTo(self.$el)

@@ -11,7 +11,7 @@
   <body>
     <div class="templates">
       <div class="entry-template">
-      	<div class="entry">
+        <div class="entry">
           <a class="entry-heading">
             <%= entry_title %>
           </a>
@@ -23,17 +23,20 @@
           
             <%= entry_summary %>
           </div>
-				</div>
+        </div>
       </div>
 
-			<div class="write-entry-template">
-			</div>
+      <div class="write-entry-template">
+        <h3> Write something fairly profound here. </h3>
+        <div class="textbox" contenteditable="true">
+        </div>
+      </div>
 
-			<div class="add-entry-template">
+      <div class="add-entry-template">
         <a href="#" class="entry add-entry">
-          <i class="fa fa-plus"></i> Add New Post
+          <i class="fa fa-plus"></i> <%= content %>
         </a>
-			</div>
+      </div>
     </div>
 
     <div class="container">
