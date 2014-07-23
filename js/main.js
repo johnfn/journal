@@ -24,10 +24,10 @@ $(function() {
     template: templ(".templates .add-entry-template"),
     text: "",
 
-    initialize: function(text) {
+    initialize: function(attrs) {
       _.bindAll(this, "render");
 
-      this.text = text || "Add New Entry";
+      this.text = attrs.text || "Add New Entry";
       this.render();
     },
 
@@ -60,6 +60,8 @@ $(function() {
       } else {
         this.state = "list";
       }
+
+      this.render();
     },
 
     addNewEntry: function(e) {
@@ -73,7 +75,8 @@ $(function() {
 
           $(".entry-list")
             .animate({ width: "50%" }, 100.0, function() {
-              self.state = "edit";
+              // done!
+              self.toggleState();
             });
         }));
     },

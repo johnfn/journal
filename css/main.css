@@ -1,3 +1,6 @@
+a {
+  cursor: pointer;
+}
 
 .entry-list {
 	background-color: 243166;
@@ -48,4 +51,17 @@ a.entry-heading {
 
 .templates {
 	display: none;
+}
+
+h3 {
+  color: white;
+  font-weight: normal;
+  padding-bottom: 10px;
+}
+
+.textbox {
+  color: white;
+  background-color: rgb(50, 63, 112);
+  min-height: 80%;
+  margin: -15px;
 }

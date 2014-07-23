@@ -3,6 +3,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link href="css/main.css" rel="stylesheet">
+    <script src="http://cdn.jsdelivr.net/livejs/4/live.js"></script>
     <script src="js/jquery-1.11.1.js"> </script>
     <script src="js/underscore.js"> </script>
     <script src="js/backbone.js"> </script>
@@ -30,10 +31,13 @@
         <h3> Write something fairly profound here. </h3>
         <div class="textbox" contenteditable="true">
         </div>
+        <div class="entry">
+          Done.
+        </div>
       </div>
 
       <div class="add-entry-template">
-        <a href="#" class="entry add-entry">
+        <a class="entry add-entry">
           <i class="fa fa-plus"></i> <%= content %>
         </a>
       </div>
