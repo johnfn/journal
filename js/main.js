@@ -38,6 +38,40 @@ $(function() {
     }
   });
 
+  var DayView = Backbone.View.extend({
+    template: templ(".templates .day-template"),
+
+    initialize: function() {
+      _.bindAll(this, "render");
+
+      this.render();
+    },
+
+    render: function() {
+      this.el.innerHTML = this.template();
+    }
+  });
+
+  var CalendarView = Backbone.View.extend({
+    el: ".content",
+    days: [],
+
+    initialize: function(attrs) {
+      _.bindAll(this, "render");
+
+      this.entries = attrs.entries;
+      this.render();
+    }, 
+
+    render: function() {
+      for (var i = 0; i < 25; i++) {
+        var day = new DayView({
+          el: $("<div>").appendTo(this.$el)
+        });
+      }
+    }
+  });
+
   var SideView = Backbone.View.extend({
     editTemplate: templ(".templates .write-entry-template"),
     entries: [],
@@ -173,6 +207,10 @@ $(function() {
     el: $(".entry-list"),
     entries: [post1, post2]
   });
+
+  new CalendarView({
+    el: $(".content")
+  })
 
   console.log("bmm");
 });

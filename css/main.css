@@ -77,3 +77,13 @@ h3 {
 .textbox .body {
   min-height: 100px;
 }
+
+.calendar-day {
+  border: 1px solid gray;
+  margin: 2px;
+  background-color: #ccc;
+}
+
+.calendar-day:hover {
+  opacity: 0.8;
+}
