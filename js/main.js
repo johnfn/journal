@@ -43,7 +43,9 @@ $(function() {
     entries: [],
     state: "list", // or "edit"
     events: {
-      "click .add-entry": "addNewEntry"
+      "click .add-entry": "addNewEntry",
+      "change .textbox.title": "changeTitle",
+      "change .textbox.body": "changeBody"
     },
 
     initialize: function(attrs) {
@@ -90,10 +92,33 @@ $(function() {
       }
     },
 
+    changeTitle: function(e) {
+
+    },
+
+    changeBody: function(e) {
+      var content = $(e.currentTarget).html();
+
+      console.log("Before: ", content);
+
+      // Yes, I'm parsing HTML with regex. What are you going to do about it?
+      // Come at me, bro.
+
+      // the first one isn't wrapped in a div, for some reason.
+      content = content.replace(/([^<]*)/, "<div>$1</div>");
+      content = content.replace(/<div><br><\/div>/g, "\n");
+      content = content.replace(/<div>(.*?)<\/div>/g, "$1\n");
+
+      console.log(content);
+    },
+
     renderEdit: function() {
       var self = this;
 
       this.el.innerHTML = this.editTemplate();
+
+      addEventsToContentEditable(".textbox.title");
+      addEventsToContentEditable(".textbox.body");
     },
 
     renderList: function() {
@@ -110,6 +135,21 @@ $(function() {
       });
     }
   });
+
+  var addEventsToContentEditable = function(selector) {
+    $('body').on('focus', selector, function() {
+        var $this = $(this);
+        $this.data('before', $this.html());
+        return $this;
+    }).on('blur keyup paste input', selector, function() {
+        var $this = $(this);
+        if ($this.data('before') !== $this.html()) {
+            $this.data('before', $this.html());
+            $this.trigger('change');
+        }
+        return $this;
+    });
+  };
 
   var post1 = {
     entry_title: "Some title",
