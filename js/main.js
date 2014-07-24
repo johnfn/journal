@@ -96,20 +96,24 @@ $(function() {
 
     },
 
-    changeBody: function(e) {
-      var content = $(e.currentTarget).html();
-
-      console.log("Before: ", content);
-
+    htmlToText: function(html) {
       // Yes, I'm parsing HTML with regex. What are you going to do about it?
       // Come at me, bro.
 
-      // the first one isn't wrapped in a div, for some reason.
-      content = content.replace(/([^<]*)/, "<div>$1</div>");
-      content = content.replace(/<div><br><\/div>/g, "\n");
-      content = content.replace(/<div>(.*?)<\/div>/g, "$1\n");
+      // the first one isn't wrapped in a div, for some reason, so wrap it.
+      html = html.replace(/([^<]*)/, "<div>$1</div>");
+      html = html.replace(/<div><br><\/div>/g, "\n");
+      html = html.replace(/<div>(.*?)<\/div>/g, "$1\n");
+      html = html.replace(/&nbsp;/g, " ");
 
-      console.log(content);
+      console.log(html);
+
+      return html;
+    },
+
+    changeBody: function(e) {
+      var content = this.htmlToText($(e.currentTarget).html());
+      $(".content")[0].innerHTML = markdown.toHTML(content);
     },
 
     renderEdit: function() {
