@@ -1,2 +1,5 @@
 *.swp
+.DS_Store
 *.sw?
+node_modules/
+data/

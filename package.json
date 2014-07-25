@@ -1,0 +1,22 @@
+{
+  "name": "journal",
+  "version": "0.0.1",
+  "description": "my journal",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnfn/journal.git"
+  },
+  "keywords": [
+    "journal"
+  ],
+  "author": "johnfn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johnfn/journal/issues"
+  },
+  "homepage": "https://github.com/johnfn/journal"
+}
