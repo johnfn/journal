@@ -1,5 +1,9 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
+
+
+app.use(bodyParser.json());
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/blog');
@@ -10,8 +14,20 @@ var Post = mongoose.model('Post', {
   date: Date
 });
 
-app.get('/', function(req, res){
+app.get('/', function(req, res) {
   res.send('hello world');
+});
+
+app.get('/posts', function(req, res) {
+  Post.find(function(e, result) {
+    if (e) res.send(e);
+
+    res.send(result);
+  });
+});
+
+app.post('/posts', function(req, res) {
+  console.log(req.body);
 });
 
 app.listen(3000);

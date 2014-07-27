@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/johnfn/journal/issues"
   },
-  "homepage": "https://github.com/johnfn/journal"
+  "homepage": "https://github.com/johnfn/journal",
+  "dependencies": {
+    "body-parser": "^1.5.1"
+  }
 }
