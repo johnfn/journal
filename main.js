@@ -2,8 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/blog');
@@ -12,10 +12,6 @@ var Post = mongoose.model('Post', {
   content: String,
   title: String,
   date: Date
-});
-
-app.get('/', function(req, res) {
-  res.send('hello world');
 });
 
 app.get('/posts', function(req, res) {

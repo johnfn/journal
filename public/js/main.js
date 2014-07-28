@@ -1,10 +1,18 @@
 $(function() {
   var Post = Backbone.Model.extend({
+    parse: function(data) {
+      return data;
+    }
   });
 
   var templ = function(template) {
     return _.template(_.unescape($(template)[0].innerHTML));
   };
+
+  var PostCollection = Backbone.Collection.extend({
+    url: "/posts",
+    model: Post
+  });
 
   var PostView = Backbone.View.extend({
     template: templ(".templates .entry-template"),
@@ -14,7 +22,7 @@ $(function() {
     },
   
     render: function() {
-      this.el.innerHTML = this.template(this.model);
+      this.el.innerHTML = this.template(this.model.toJSON());
       
       return this;
     }
@@ -74,7 +82,6 @@ $(function() {
 
   var SideView = Backbone.View.extend({
     editTemplate: templ(".templates .write-entry-template"),
-    entries: [],
     state: "list", // or "edit"
     events: {
       "click .add-entry": "addNewEntry",
@@ -131,7 +138,7 @@ $(function() {
     },
 
     htmlToText: function(html) {
-      // Yes, I'm parsing HTML with regex. What are you going to do about it?
+      // Yeah, I'm parsing HTML with regex. What are you going to do about it?
       // Come at me, bro.
 
       // the first one isn't wrapped in a div, for some reason, so wrap it.
@@ -165,7 +172,7 @@ $(function() {
         el: $("<div>").appendTo(self.$el)
       });
 
-      _.each(this.entries, function(e) {
+      this.entries.each(function(e) {
         new PostView({
           model: e,
           el: $("<div>").appendTo(self.$el)
@@ -203,14 +210,19 @@ $(function() {
     entry_content: "lots of compelling content goes here."
   };
 
-  new SideView({ 
-    el: $(".entry-list"),
-    entries: [post1, post2]
-  });
-
   new CalendarView({
     el: $(".content")
-  })
+  });
 
   console.log("bmm");
+
+  var posts = new PostCollection();
+  posts.fetch({
+    success: function() {
+      new SideView({
+        el: $(".entry-list"),
+        entries: posts
+      });
+    }
+  });
 });
