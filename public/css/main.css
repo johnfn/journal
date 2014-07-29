@@ -80,10 +80,14 @@ h3 {
 .calendar-day {
   background-color: #F0F0F0;
   color: black;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .calendar-day:hover {
   background-color: #EAEAEA;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .calendar-day .big-number {
@@ -103,4 +107,9 @@ h3 {
 
 .button {
   color: white;
+}
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
 }

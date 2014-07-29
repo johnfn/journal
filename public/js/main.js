@@ -62,7 +62,7 @@ $(function() {
   });
 
   var CalendarView = Backbone.View.extend({
-    el: ".content .row",
+    el: ".content",
 
     initialize: function(attrs) {
       _.bindAll(this, "render");
@@ -89,6 +89,8 @@ $(function() {
       var sortedKeys = _.sortBy(_.keys(groups), function(key) {
         return new Date(key);
       });
+
+      debugger;
 
       _.each(sortedKeys, function(date) {
         var readableDate = ("" + new Date(parseInt(date))).substring(4, 15);
@@ -245,7 +247,6 @@ $(function() {
   var posts = new PostCollection();
 
   new CalendarView({
-    el: $(".content"),
     collection: posts
   });
 
