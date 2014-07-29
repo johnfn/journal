@@ -3,43 +3,42 @@ a {
 }
 
 .entry-list {
-	background-color: 243166;
-	min-height: 100%;
-	padding-top: 10px
+  background-color: 243166;
+  min-height: 100%;
+  padding-top: 10px
 }
 
 .content {
-	padding-top: 10px;
-	background-color: #ddd;
-	min-height: 100%;
-    
+  padding-top: 10px;
+  background-color: #f8f8f8;
+  min-height: 100%;
 }
 
 a.entry-heading {
-    text-shadow: black 1px 1px 1px;
-	float: left;
-    font-size: 20px;
-    cursor: pointer;
+  text-shadow: black 1px 1px 1px;
+  float: left;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .entry-description {
-	font-size: 12px;
-	clear: both;
-	text-shadow: black 1px 1px 1px;
-	padding-left: 10px;
+  font-size: 12px;
+  clear: both;
+  text-shadow: black 1px 1px 1px;
+  padding-left: 10px;
 }
 
 .entry {
-	border-bottom: 1px solid #115;
-	padding-bottom: 5px;
-	margin-bottom: 10px;
-	color: #A9CAEC;
+  border-bottom: 1px solid #115;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  color: #A9CAEC;
 }
 
 .date {
-	text-shadow: black 1px 1px 1px;
-	font-size: 10px;
-	float: right;
+  text-shadow: black 1px 1px 1px;
+  font-size: 10px;
+  float: right;
 }
 
 .whole-journal {
@@ -79,9 +78,23 @@ h3 {
 }
 
 .calendar-day {
-  border: 1px solid gray;
-  margin: 2px;
-  background-color: #ccc;
+  background-color: #F0F0F0;
+  color: black;
+}
+
+.calendar-day:hover {
+  background-color: #EAEAEA;
+}
+
+.calendar-day .big-number {
+  font-size: 24px;
+  text-align: center;
+}
+
+.calendar-day .calendar-date {
+  font-size: 10px;
+  text-align: center;
+  padding-bottom: 2px;
 }
 
 .calendar-day:hover {

@@ -50,34 +50,55 @@ $(function() {
   var DayView = Backbone.View.extend({
     template: templ(".templates .day-template"),
 
-    initialize: function() {
+    initialize: function(attrs) {
       _.bindAll(this, "render");
 
-      this.render();
+      this.render(attrs);
     },
 
-    render: function() {
-      this.el.innerHTML = this.template();
+    render: function(attrs) {
+      this.el.innerHTML = this.template(attrs);
     }
   });
 
   var CalendarView = Backbone.View.extend({
-    el: ".content",
-    days: [],
+    el: ".content .row",
 
     initialize: function(attrs) {
       _.bindAll(this, "render");
 
+      this.collection = attrs.collection;
       this.entries = attrs.entries;
-      this.render();
+
+      this.listenTo(this.collection, 'sync', this.render);
     }, 
 
     render: function() {
-      for (var i = 0; i < 25; i++) {
+      var self = this;
+
+      var groups = this.collection.groupBy(function (model) {
+        var newDate = new Date(model.get('date'));
+        newDate.setHours(0);
+        newDate.setMinutes(0);
+        newDate.setSeconds(0);
+        newDate.setMilliseconds(0);
+
+        return +newDate;
+      });
+
+      var sortedKeys = _.sortBy(_.keys(groups), function(key) {
+        return new Date(key);
+      });
+
+      _.each(sortedKeys, function(date) {
+        var readableDate = ("" + new Date(parseInt(date))).substring(4, 15);
+
         var day = new DayView({
-          el: $("<div>").appendTo(this.$el)
+          el: $("<div>").appendTo(self.$el),
+          date: readableDate,
+          number: groups[date].length
         });
-      }
+      });
     }
   });
 
@@ -117,6 +138,7 @@ $(function() {
         content: content,
         title: title
       });
+
 
       post.save().always(function() {
         console.log("done");
@@ -220,11 +242,13 @@ $(function() {
     });
   };
 
+  var posts = new PostCollection();
+
   new CalendarView({
-    el: $(".content")
+    el: $(".content"),
+    collection: posts
   });
 
-  var posts = new PostCollection();
   posts.fetch({
     success: function() {
       new SideView({
