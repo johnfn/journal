@@ -23,7 +23,12 @@ app.get('/posts', function(req, res) {
 });
 
 app.post('/posts', function(req, res) {
-  console.log(req.body);
+  var newPost = new Post(req.body);
+
+  newPost.save(function(err, result) {
+    res.status(200);
+    res.end();
+  });
 });
 
 app.listen(3000);

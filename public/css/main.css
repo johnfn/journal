@@ -70,11 +70,11 @@ h3 {
   outline: none;
 }
 
-.textbox .title {
-  border-bottom: 1px solid white;
+.textbox.title {
+  border-bottom: 1px solid #555;
 }
 
-.textbox .body {
+.textbox.body {
   min-height: 100px;
 }
 
@@ -86,4 +86,8 @@ h3 {
 
 .calendar-day:hover {
   opacity: 0.8;
+}
+
+.button {
+  color: white;
 }

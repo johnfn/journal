@@ -1,5 +1,6 @@
 $(function() {
   var Post = Backbone.Model.extend({
+    url: "/posts",
     parse: function(data) {
       return data;
     }
@@ -86,15 +87,40 @@ $(function() {
     events: {
       "click .add-entry": "addNewEntry",
       "change .textbox.title": "changeTitle",
-      "change .textbox.body": "changeBody"
+      "change .textbox.body": "changeBody",
+      "click .finish-post": "finishPost"
     },
 
     initialize: function(attrs) {
-      _.bindAll(this, "toggleState", "addNewEntry", "render");
+      _.bindAll(this, "toggleState", "addNewEntry", "render", "htmlToText", "getText", "getTitle", "finishPost");
 
       this.entries = attrs.entries;
 
       this.render();
+    },
+
+    getText: function() {
+      return this.htmlToText(this.$(".textbox.body").html());
+    },
+
+    getTitle: function() {
+      return this.htmlToText(this.$(".textbox.title").html());
+    },
+
+    finishPost: function(e) {
+      var date = new Date();
+      var content = this.getText();
+      var title = this.getTitle();
+
+      var post = new Post({
+        date: date,
+        content: content,
+        title: title
+      });
+
+      post.save().always(function() {
+        console.log("done");
+      });
     },
 
     toggleState: function() {
@@ -147,8 +173,6 @@ $(function() {
       html = html.replace(/<div>(.*?)<\/div>/g, "$1\n");
       html = html.replace(/&nbsp;/g, " ");
 
-      console.log(html);
-
       return html;
     },
 
@@ -196,25 +220,9 @@ $(function() {
     });
   };
 
-  var post1 = {
-    entry_title: "Some title",
-    entry_date: ("" + new Date()).substr(0, 10),
-    entry_summary: "this is a compelling summary",
-    entry_content: "lots and lots of compelling content goes here."
-  };
-
-  var post2 = {
-    entry_title: "Some title",
-    entry_date: ("" + new Date()).substr(0, 10),
-    entry_summary: "this is a compelling summary",
-    entry_content: "lots of compelling content goes here."
-  };
-
   new CalendarView({
     el: $(".content")
   });
-
-  console.log("bmm");
 
   var posts = new PostCollection();
   posts.fetch({
